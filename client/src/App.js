@@ -5,7 +5,7 @@ import Books from "./component/books";
 import { Route, Switch } from "react-router-dom";
 function App() {
   return (
-    <div>
+    <div style={{ backgroundColor: "black", minHeight: "100vh" }}>
       <Switch>
         <Route exact path="/">
           <Books />

@@ -79,21 +79,6 @@ const books = [
     title: "test7",
     author: "auth7",
   },
-  {
-    id: 8,
-    title: "test8",
-    author: "auth8",
-  },
-  {
-    id: 9,
-    title: "test9",
-    author: "auth9",
-  },
-  {
-    id: 10,
-    title: "test10",
-    author: "auth10",
-  },
 ];
 const resolvers = {
   Query: {
