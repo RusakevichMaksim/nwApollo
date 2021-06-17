@@ -1,0 +1,24 @@
+{
+  "name": "apollotest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm run dev --prefix server",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RusakevichMaksim/grapqltutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RusakevichMaksim/grapqltutorial/issues"
+  },
+  "homepage": "https://github.com/RusakevichMaksim/grapqltutorial#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
