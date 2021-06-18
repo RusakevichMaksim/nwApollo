@@ -62,6 +62,13 @@ const Books = () => {
             >
               deleted {book.id}
             </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => push(`/update/${book.id}`)}
+            >
+              обновить
+            </Button>
             <hr align="left" width="400" size="3" color="#0000dd" />
           </div>
         );

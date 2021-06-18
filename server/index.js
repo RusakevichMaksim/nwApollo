@@ -34,8 +34,10 @@ const typeDefs = gql`
     title: String
     author: String
   }
+
   type Mutation {
     addBook(onebook: BookInput): Book
+    updateBook(book: BookInput): String
     deleteBook(id: ID): String
   }
 
@@ -74,11 +76,6 @@ const books = [
     title: "test6",
     author: "auth6",
   },
-  {
-    id: 7,
-    title: "test7",
-    author: "auth7",
-  },
 ];
 const resolvers = {
   Query: {
@@ -88,7 +85,7 @@ const resolvers = {
     ],
     books: () => books,
     getBook: (parent, arg) => {
-      books.find(({ id }) => console.log(arg.id == id, "aaa"));
+      // books.find(({ id }) => console.log(arg.id == id, "aaa"));
       return books.find(({ id }) => arg.id == id);
     },
   },
@@ -101,6 +98,12 @@ const resolvers = {
       let someBooks = books.filter((item) => item.id < arg.id);
       books.splice(someBooks.length, 1);
       return "book deleted";
+    },
+    updateBook: (parent, arg) => {
+      objIndex = books.findIndex((obj) => obj.id == arg.book.id);
+      books[objIndex] = arg.book;
+      console.log(books);
+      return "update";
     },
   },
   Subscription: {
