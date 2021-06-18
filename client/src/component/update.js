@@ -5,7 +5,10 @@ import UPDATE_BOOK from "../api/UpdateBook";
 import { useRef } from "react";
 import client from "../utils/client";
 import { GetAllBooks } from "../api/GetAllBooks";
+import { useHistory } from "react-router-dom";
+
 const Update = (props) => {
+  let history = useHistory();
   let { idBooks } = useParams();
   const newTitle = useRef();
   const newAuthor = useRef();
@@ -48,25 +51,9 @@ const Update = (props) => {
         >
           Update
         </button>
-        {/* <button
-          style={{ backgroundColor: "red", color: "white", height: "50px" }}
-          onClick={() => {
-            let test = client.writeQuery({
-              query: UPDATE_BOOK,
-              variables: {
-                // Provide any required variables here
-                book: {
-                  id: idBooks,
-                  title: newTitle.current.value,
-                  author: newAuthor.current.value,
-                },
-              },
-            });
-            console.log(client.cache);
-          }}
-        >
-          FakeUpdate
-        </button> */}
+        <button style={{ marginTop: "50px" }} onClick={() => history.goBack()}>
+          Back
+        </button>
       </div>
       {console.log(data.getBook)}
       <p>{data.getBook.id}</p>
