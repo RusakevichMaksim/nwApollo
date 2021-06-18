@@ -33,10 +33,10 @@ const Books = () => {
       [name]: value,
     }));
   };
-  const [addBook, { dataMutation }] = useMutation(AddBook, {
+  const [addBook, {}] = useMutation(AddBook, {
     refetchQueries: [{ query: GetAllBooks }],
   });
-  const [deleteBook, { dataDeleteMutation }] = useMutation(DeleteBooks, {
+  const [deleteBook, {}] = useMutation(DeleteBooks, {
     refetchQueries: [{ query: GetAllBooks }],
   });
 

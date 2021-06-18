@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const GetBooks = gql`
+const GET_BOOKS = gql`
   query oneBoks($id: ID) {
     getBook(id: $id) {
       id
@@ -10,4 +10,4 @@ const GetBooks = gql`
   }
 `;
 
-export default GetBooks;
+export default GET_BOOKS;

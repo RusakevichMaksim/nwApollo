@@ -1,21 +1,22 @@
 import { useQuery, useMutation } from "@apollo/client";
-import GetBooks from "../api/GetBooks";
+import GET_BOOKS from "../api/GetBooks";
 import { useParams } from "react-router";
-import UpdateBook from "../api/UpdateBook";
+import UPDATE_BOOK from "../api/UpdateBook";
 import { useRef } from "react";
+import client from "../utils/client";
+import { GetAllBooks } from "../api/GetAllBooks";
 const Update = (props) => {
   let { idBooks } = useParams();
-
-  const { loading, error, data } = useQuery(GetBooks, {
-    variables: { id: idBooks },
-  });
   const newTitle = useRef();
   const newAuthor = useRef();
 
-  const [updateBook, { dataMutation }] = useMutation(UpdateBook, {
-    refetchQueries: [{ query: GetBooks, variables: { id: idBooks } }],
+  const { loading, error, data } = useQuery(GET_BOOKS, {
+    variables: { id: idBooks },
   });
-  //   const [updateBook, { dataMutation }] = useMutation(UpdateBook);
+  const [updateBook, {}] = useMutation(UPDATE_BOOK, {
+    refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
+  });
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>oops...</div>;
 
@@ -47,8 +48,27 @@ const Update = (props) => {
         >
           Update
         </button>
+        {/* <button
+          style={{ backgroundColor: "red", color: "white", height: "50px" }}
+          onClick={() => {
+            let test = client.writeQuery({
+              query: UPDATE_BOOK,
+              variables: {
+                // Provide any required variables here
+                book: {
+                  id: idBooks,
+                  title: newTitle.current.value,
+                  author: newAuthor.current.value,
+                },
+              },
+            });
+            console.log(client.cache);
+          }}
+        >
+          FakeUpdate
+        </button> */}
       </div>
-
+      {console.log(data.getBook)}
       <p>{data.getBook.id}</p>
       <p>{data.getBook.title}</p>
       <p>{data.getBook.author}</p>
