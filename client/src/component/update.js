@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import UPDATE_BOOK from "../api/UpdateBook";
 import { useRef } from "react";
 import client from "../utils/client";
-import { GetAllBooks } from "../api/GetAllBooks";
+import { GET_ALL_BOOKS } from "../api/GetAllBooks";
 import { useHistory } from "react-router-dom";
 
 const Update = (props) => {
@@ -16,9 +16,21 @@ const Update = (props) => {
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { id: idBooks },
   });
-  const [updateBook, {}] = useMutation(UPDATE_BOOK, {
+  const [updateBook] = useMutation(UPDATE_BOOK, {
     refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
   });
+
+  // const test = client.readQuery({
+  //   query: GET_ALL_BOOKS,
+  //   variables: {
+  //     // Provide any required variables here
+  //     // id: 1,
+  //   },
+  // });
+
+  // console.log(test, client);
+
+  // return <div>11</div>;
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>oops...</div>;

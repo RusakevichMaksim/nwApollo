@@ -1,9 +1,9 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 
-import { GetAllBooks } from "../api/GetAllBooks";
-import { AddBook } from "../api/AddBook";
-import { DeleteBooks } from "../api/DeleteBook";
+import { GET_ALL_BOOKS } from "../api/GetAllBooks";
+import { ADD_BOOK } from "../api/AddBook";
+import { DELETE_BOOKS } from "../api/DeleteBook";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,7 +25,7 @@ const Books = () => {
   const { push } = useHistory();
   const classes = useStyles();
 
-  const { loading, error, data } = useQuery(GetAllBooks);
+  const { loading, error, data } = useQuery(GET_ALL_BOOKS);
   const [inputBook, setInputBook] = useState({ id: "", title: "", author: "" });
   const handleChangeBookInput = (name, value) => {
     setInputBook((prevState) => ({
@@ -33,11 +33,11 @@ const Books = () => {
       [name]: value,
     }));
   };
-  const [addBook, {}] = useMutation(AddBook, {
-    refetchQueries: [{ query: GetAllBooks }],
+  const [addBook] = useMutation(ADD_BOOK, {
+    refetchQueries: [{ query: GET_ALL_BOOKS }],
   });
-  const [deleteBook, {}] = useMutation(DeleteBooks, {
-    refetchQueries: [{ query: GetAllBooks }],
+  const [deleteBook] = useMutation(DELETE_BOOKS, {
+    refetchQueries: [{ query: GET_ALL_BOOKS }],
   });
 
   if (loading) return <p>Loading...</p>;
