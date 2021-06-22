@@ -30,6 +30,15 @@ const splitLink = split(
   wsLink,
   httpLink
 );
+
+const test = {
+  typePolicies: {
+    books: {
+      keyFields: ["code"],
+    },
+  },
+};
+
 const client = new ApolloClient({
   link: splitLink,
   cache: new InMemoryCache(),
