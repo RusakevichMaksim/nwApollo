@@ -41,7 +41,22 @@ const test = {
 
 const client = new ApolloClient({
   link: splitLink,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Book: {
+        fields: {
+          Concat: {
+            read: (_, { readField }) => {
+              console.log("asdds");
+              const title = readField("title");
+              const author = readField("author");
+              return `${title} ${author}`;
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 export default client;

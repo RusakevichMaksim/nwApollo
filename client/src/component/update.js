@@ -20,66 +20,67 @@ const Update = (props) => {
     refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
   });
 
-  const test = client.readQuery({
-    query: GET_ALL_BOOKS,
-    variables: {
-      // Provide any required variables here
-      // id: 1,
-    },
-  });
-  const test2 = client.readQuery({
-    query: GET_BOOKS,
-    variables: {
-      // Provide any required variables here
-      // id: "books:1",
-      id: idBooks,
-    },
-  });
+  // const test = client.readQuery({
+  //   query: GET_ALL_BOOKS,
+  //   variables: {
+  //     // Provide any required variables here
+  //     // id: 1,
+  //   },
+  // });
+  // const test2 = client.readQuery({
+  //   query: GET_BOOKS,
+  //   variables: {
+  //     // Provide any required variables here
+  //     // id: "books:1",
+  //     id: idBooks,
+  //   },
+  // });
 
-  console.log(test2);
+  // console.log(test2);
 
-  return <div>11</div>;
+  // return <div>11</div>;
 
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>oops...</div>;
-
-  // return (
-  //   <div style={{ color: "white", padding: "50px 50px 0px" }}>
-  //     <div
-  //       style={{
-  //         display: "flex",
-  //         flexDirection: "column",
-  //         width: "200px",
-  //         paddingBottom: "50px",
-  //       }}
-  //     >
-  //       <input ref={newTitle} defaultValue={data.getBook.title} />
-  //       <input ref={newAuthor} defaultValue={data.getBook.author} />
-  //       <button
-  //         style={{ backgroundColor: "red", color: "white", height: "50px" }}
-  //         onClick={() => {
-  //           updateBook({
-  //             variables: {
-  //               book: {
-  //                 id: idBooks,
-  //                 title: newTitle.current.value,
-  //                 author: newAuthor.current.value,
-  //               },
-  //             },
-  //           });
-  //         }}
-  //       >
-  //         Update
-  //       </button>
-  //       <button style={{ marginTop: "50px" }} onClick={() => history.goBack()}>
-  //         Back
-  //       </button>
-  //     </div>
-  //     {console.log(data.getBook)}
-  //     <p>{data.getBook.id}</p>
-  //     <p>{data.getBook.title}</p>
-  //     <p>{data.getBook.author}</p>
-  //   </div>
-  // );
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>oops...</div>;
+  console.log(data.getBook);
+  return (
+    <div style={{ color: "white", padding: "50px 50px 0px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "200px",
+          paddingBottom: "50px",
+        }}
+      >
+        <input ref={newTitle} defaultValue={data.getBook.title} />
+        <input ref={newAuthor} defaultValue={data.getBook.author} />
+        <button
+          style={{ backgroundColor: "red", color: "white", height: "50px" }}
+          onClick={() => {
+            updateBook({
+              variables: {
+                book: {
+                  id: idBooks,
+                  title: newTitle.current.value,
+                  author: newAuthor.current.value,
+                },
+              },
+            });
+          }}
+        >
+          Update
+        </button>
+        <button style={{ marginTop: "50px" }} onClick={() => history.goBack()}>
+          Back
+        </button>
+      </div>
+      {console.log(data.getBook)}
+      <p>{data.getBook.Concat}</p>
+      <p>{data.getBook.id}</p>
+      <p>{data.getBook.title}</p>
+      <p>{data.getBook.author}</p>
+    </div>
+  );
 };
 export default Update;
