@@ -15,30 +15,11 @@ const Update = (props) => {
 
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { id: idBooks },
+    fetchPolicy: "cache-first",
   });
   const [updateBook] = useMutation(UPDATE_BOOK, {
     refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
   });
-
-  // const test = client.readQuery({
-  //   query: GET_ALL_BOOKS,
-  //   variables: {
-  //     // Provide any required variables here
-  //     // id: 1,
-  //   },
-  // });
-  // const test2 = client.readQuery({
-  //   query: GET_BOOKS,
-  //   variables: {
-  //     // Provide any required variables here
-  //     // id: "books:1",
-  //     id: idBooks,
-  //   },
-  // });
-
-  // console.log(test2);
-
-  // return <div>11</div>;
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>oops...</div>;

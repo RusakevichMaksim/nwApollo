@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Subs from "./component/subs";
 import Books from "./component/books";

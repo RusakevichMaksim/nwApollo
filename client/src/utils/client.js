@@ -43,14 +43,30 @@ const client = new ApolloClient({
   link: splitLink,
   cache: new InMemoryCache({
     typePolicies: {
+      Query: {
+        fields: {
+          getBook: {
+            read: (existing, { toReference, args }) => {
+              const bookRef = toReference({ __typename: "Book", id: args.id });
+              console.log("bookRef");
+              return existing ?? bookRef;
+            },
+          },
+        },
+      },
       Book: {
+        keyFields: ["id"],
         fields: {
           Concat: {
             read: (_, { readField }) => {
-              console.log("asdds");
               const title = readField("title");
               const author = readField("author");
               return `${title} ${author}`;
+            },
+          },
+          title: {
+            read(title) {
+              return title.toUpperCase();
             },
           },
         },
