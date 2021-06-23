@@ -1,15 +1,20 @@
 import "./App.css";
-import Subs from "./component/subs";
-import Books from "./component/books";
+import Subs from "./component/Subs";
+import Books from "./component/Books";
 import { Route, Switch } from "react-router-dom";
-import Update from "./component/update";
+import Update from "./component/Update";
+const topPadding = "20px";
 function App() {
   return (
     <div
-      style={{ minHeight: "100vh", paddingLeft: "50px", paddingTop: "50px" }}
+      style={{
+        minHeight: `calc(100vh-${topPadding})`,
+        paddingLeft: "50px",
+        paddingTop: `${topPadding}`,
+      }}
     >
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/:page?">
           <Books />
         </Route>
         <Route path="/subs/">

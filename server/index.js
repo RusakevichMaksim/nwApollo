@@ -205,13 +205,11 @@ const resolvers = {
     ],
     books: () => books,
     getBook: (parent, arg) => {
-      // books.find(({ id }) => console.log(arg.id == id, "aaa"));
       return books.find(({ id }) => arg.id == id);
     },
   },
   Mutation: {
     addBook: (parent, arg) => {
-      // console.log(arg);
       return books.push(arg.onebook);
     },
     deleteBook: (parent, arg) => {
@@ -222,7 +220,6 @@ const resolvers = {
     updateBook: (parent, arg) => {
       objIndex = books.findIndex((obj) => obj.id == arg.book.id);
       books[objIndex] = arg.book;
-      // console.log(books);
       return "update";
     },
   },

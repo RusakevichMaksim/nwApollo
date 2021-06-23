@@ -23,6 +23,10 @@ const Update = (props) => {
   if (error || !data) return <div>oops...</div>;
   return (
     <div>
+      <p>Concat field: {data.getBook.Concat}</p>
+      <p>id: {data.getBook.id}</p>
+      <p>title: {data.getBook.title}</p>
+      <p>author: {data.getBook.author}</p>{" "}
       <div
         style={{
           display: "flex",
@@ -61,10 +65,6 @@ const Update = (props) => {
           Back
         </button>
       </div>
-      <p>Concat field: {data.getBook.Concat}</p>
-      <p>id: {data.getBook.id}</p>
-      <p>title: {data.getBook.title}</p>
-      <p>author: {data.getBook.author}</p>
     </div>
   );
 };

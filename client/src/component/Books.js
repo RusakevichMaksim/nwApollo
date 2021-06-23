@@ -47,32 +47,40 @@ const Books = () => {
       <Button variant="contained" color="primary" onClick={() => push("/subs")}>
         push to websocket
       </Button>
-      {data.books.map((book) => {
-        return (
-          <div key={book.title}>
-            <p>{book.title}</p>
-            <p>{book.author}</p>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginRight: "10px" }}
-              onClick={() => {
-                deleteBook({ variables: { id: book.id } });
-              }}
-            >
-              deleted {book.id}
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => push(`/update/${book.id}`)}
-            >
-              update
-            </Button>
-            <hr align="left" width="400" size="3" color="#0000dd" />
-          </div>
-        );
-      })}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
+        {data.books.map((book) => {
+          return (
+            <div key={book.title} style={{ padding: "20px" }}>
+              <p>{book.title}</p>
+              <p>{book.author}</p>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginRight: "10px" }}
+                onClick={() => {
+                  deleteBook({ variables: { id: book.id } });
+                }}
+              >
+                deleted {book.id}
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => push(`/update/${book.id}`)}
+              >
+                update
+              </Button>
+              <hr align="left" width="400" size="3" color="#0000dd" />
+            </div>
+          );
+        })}
+      </div>
       <div className={classes.inp}>
         <TextField
           placeholder="id"
