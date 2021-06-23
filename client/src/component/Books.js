@@ -10,11 +10,22 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles({});
+
 const Books = () => {
   const { push } = useHistory();
   const classes = useStyles();
+  const [offset, setOffset] = useState(0);
+  const limit = 5;
+  const { loading, error, data, refetch } = useQuery(GET_ALL_BOOKS, {
+    variables: {
+      offset: offset,
+      limit: limit,
+    },
+  });
+  const hendleOffsetChange = (value) => {
+    setOffset(value);
+  };
 
-  const { loading, error, data } = useQuery(GET_ALL_BOOKS);
   const [inputBook, setInputBook] = useState({ id: "", title: "", author: "" });
   const handleChangeBookInput = (name, value) => {
     setInputBook((prevState) => ({
@@ -23,10 +34,26 @@ const Books = () => {
     }));
   };
   const [addBook] = useMutation(ADD_BOOK, {
-    refetchQueries: [{ query: GET_ALL_BOOKS }],
+    refetchQueries: [
+      {
+        query: GET_ALL_BOOKS,
+        variables: {
+          offset: offset,
+          limit: limit,
+        },
+      },
+    ],
   });
   const [deleteBook] = useMutation(DELETE_BOOKS, {
-    refetchQueries: [{ query: GET_ALL_BOOKS }],
+    refetchQueries: [
+      {
+        query: GET_ALL_BOOKS,
+        variables: {
+          offset: offset,
+          limit: limit,
+        },
+      },
+    ],
   });
 
   if (loading) return <p>Loading...</p>;
@@ -39,7 +66,7 @@ const Books = () => {
         style={{ marginBottom: "10px" }}
         onClick={() => push("/subs")}
       >
-        push to websocket
+        go to websocket
       </Button>
       <div className="book__card-wrapper ">
         {data.books.map((book) => {
@@ -67,6 +94,28 @@ const Books = () => {
             </div>
           );
         })}
+      </div>
+      <div className="mt-10 mb-10">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            hendleOffsetChange(offset - limit);
+          }}
+          disabled={offset === 0 ? true : false}
+        >
+          back page
+        </Button>
+        <Button
+          className="ml-10"
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            hendleOffsetChange(offset + limit);
+          }}
+        >
+          next page
+        </Button>
       </div>
       <div className={classes.inp}>
         <TextField

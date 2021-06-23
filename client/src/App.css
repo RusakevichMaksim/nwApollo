@@ -57,6 +57,15 @@
 .mr-10 {
   margin-right: 10px !important;
 }
+.ml-10 {
+  margin-left: 10px !important;
+}
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+.mt-10 {
+  margin-top: 10px !important;
+}
 .update__card-wrapper {
   width: 320px;
   background-color: rgb(236 233 233);
