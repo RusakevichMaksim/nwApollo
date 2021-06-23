@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "black",
-    color: "white",
+    // backgroundColor: "black",
+    // color: "white",
   },
 });
 const Subs = () => {
@@ -17,7 +17,7 @@ const Subs = () => {
   return (
     <div className={classes.root}>
       <Button variant="contained" color="primary" onClick={() => push("/")}>
-        На главную
+        go back
       </Button>
       <h4>New comment: {!loading && data.messageCreated.content}</h4>
     </div>

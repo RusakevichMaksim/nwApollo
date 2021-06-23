@@ -46,7 +46,7 @@ const Books = () => {
   return (
     <div className={classes.root}>
       <Button variant="contained" color="primary" onClick={() => push("/subs")}>
-        на веб сокет
+        push to websocket
       </Button>
       {data.books.map((book) => {
         return (
@@ -56,6 +56,7 @@ const Books = () => {
             <Button
               variant="contained"
               color="primary"
+              style={{ marginRight: "10px" }}
               onClick={() => {
                 deleteBook({ variables: { id: book.id } });
               }}
@@ -67,7 +68,7 @@ const Books = () => {
               color="primary"
               onClick={() => push(`/update/${book.id}`)}
             >
-              обновить
+              update
             </Button>
             <hr align="left" width="400" size="3" color="#0000dd" />
           </div>

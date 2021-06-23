@@ -48,7 +48,7 @@ const client = new ApolloClient({
           getBook: {
             read: (existing, { toReference, args }) => {
               const bookRef = toReference({ __typename: "Book", id: args.id });
-              console.log("bookRef");
+              console.log(existing, bookRef);
               return existing ?? bookRef;
             },
           },
@@ -62,11 +62,6 @@ const client = new ApolloClient({
               const title = readField("title");
               const author = readField("author");
               return `${title} ${author}`;
-            },
-          },
-          title: {
-            read(title) {
-              return title.toUpperCase();
             },
           },
         },

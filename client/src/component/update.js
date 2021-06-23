@@ -22,10 +22,9 @@ const Update = (props) => {
   });
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>oops...</div>;
-  console.log(data.getBook);
+  if (error || !data) return <div>oops...</div>;
   return (
-    <div style={{ color: "white", padding: "50px 50px 0px" }}>
+    <div>
       <div
         style={{
           display: "flex",
@@ -37,7 +36,12 @@ const Update = (props) => {
         <input ref={newTitle} defaultValue={data.getBook.title} />
         <input ref={newAuthor} defaultValue={data.getBook.author} />
         <button
-          style={{ backgroundColor: "red", color: "white", height: "50px" }}
+          style={{
+            backgroundColor: "red",
+            color: "white",
+            height: "30px",
+            marginTop: "20px",
+          }}
           onClick={() => {
             updateBook({
               variables: {
@@ -52,15 +56,18 @@ const Update = (props) => {
         >
           Update
         </button>
-        <button style={{ marginTop: "50px" }} onClick={() => history.goBack()}>
+        <button
+          style={{ marginTop: "20px", height: "30px" }}
+          onClick={() => history.goBack()}
+        >
           Back
         </button>
       </div>
       {console.log(data.getBook)}
-      <p>{data.getBook.Concat}</p>
-      <p>{data.getBook.id}</p>
-      <p>{data.getBook.title}</p>
-      <p>{data.getBook.author}</p>
+      <p>Concat field: {data.getBook.Concat}</p>
+      <p>id: {data.getBook.id}</p>
+      <p>title: {data.getBook.title}</p>
+      <p>author: {data.getBook.author}</p>
     </div>
   );
 };
