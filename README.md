@@ -8,4 +8,4 @@
 
 ### `5. cd ..`
 
-### `5. npm run dev`
+### `6. npm run dev`
