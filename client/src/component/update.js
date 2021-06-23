@@ -3,8 +3,6 @@ import GET_BOOKS from "../api/GetBooks";
 import { useParams } from "react-router";
 import UPDATE_BOOK from "../api/UpdateBook";
 import { useRef } from "react";
-import client from "../utils/client";
-import { GET_ALL_BOOKS } from "../api/GetAllBooks";
 import { useHistory } from "react-router-dom";
 
 const Update = (props) => {
@@ -63,7 +61,6 @@ const Update = (props) => {
           Back
         </button>
       </div>
-      {console.log(data.getBook)}
       <p>Concat field: {data.getBook.Concat}</p>
       <p>id: {data.getBook.id}</p>
       <p>title: {data.getBook.title}</p>

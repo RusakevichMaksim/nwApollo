@@ -211,7 +211,7 @@ const resolvers = {
   },
   Mutation: {
     addBook: (parent, arg) => {
-      console.log(arg);
+      // console.log(arg);
       return books.push(arg.onebook);
     },
     deleteBook: (parent, arg) => {
@@ -222,7 +222,7 @@ const resolvers = {
     updateBook: (parent, arg) => {
       objIndex = books.findIndex((obj) => obj.id == arg.book.id);
       books[objIndex] = arg.book;
-      console.log(books);
+      // console.log(books);
       return "update";
     },
   },
@@ -244,7 +244,7 @@ const httpServer = createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 httpServer.listen({ port: 3005 }, () => {
-  console.log("Apollo Server on http://localhost:3005/graphql");
+  // console.log("Apollo Server on http://localhost:3005/graphql");
 });
 
 let id = 2;

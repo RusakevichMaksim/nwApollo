@@ -1,10 +1,4 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { split, HttpLink } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
@@ -31,14 +25,6 @@ const splitLink = split(
   httpLink
 );
 
-const test = {
-  typePolicies: {
-    books: {
-      keyFields: ["code"],
-    },
-  },
-};
-
 const client = new ApolloClient({
   link: splitLink,
   cache: new InMemoryCache({
@@ -48,7 +34,6 @@ const client = new ApolloClient({
           getBook: {
             read: (existing, { toReference, args }) => {
               const bookRef = toReference({ __typename: "Book", id: args.id });
-              console.log(existing, bookRef);
               return existing ?? bookRef;
             },
           },

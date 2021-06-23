@@ -1,4 +1,4 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 
 import { GET_ALL_BOOKS } from "../api/GetAllBooks";
@@ -42,7 +42,6 @@ const Books = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log(data);
   return (
     <div className={classes.root}>
       <Button variant="contained" color="primary" onClick={() => push("/subs")}>
