@@ -9,18 +9,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
-const useStyles = makeStyles({
-  root: {
-    backgroundColor: "white",
-    color: "black",
-  },
-  inp: {
-    "& > *": {
-      mcolor: "white",
-      width: "25ch",
-    },
-  },
-});
+const useStyles = makeStyles({});
 const Books = () => {
   const { push } = useHistory();
   const classes = useStyles();
@@ -44,25 +33,24 @@ const Books = () => {
   if (error) return <p>Error :(</p>;
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary" onClick={() => push("/subs")}>
+      <Button
+        variant="contained"
+        color="primary"
+        style={{ marginBottom: "10px" }}
+        onClick={() => push("/subs")}
+      >
         push to websocket
       </Button>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className="book__card-wrapper ">
         {data.books.map((book) => {
           return (
-            <div key={book.title} style={{ padding: "20px" }}>
-              <p>{book.title}</p>
-              <p>{book.author}</p>
+            <div key={book.title} className="book__card">
+              <p className="text__Backgound">{book.title}</p>
+              <p className="text__Backgound">{book.author}</p>
               <Button
                 variant="contained"
                 color="primary"
-                style={{ marginRight: "10px" }}
+                className="mr-10"
                 onClick={() => {
                   deleteBook({ variables: { id: book.id } });
                 }}
@@ -76,7 +64,6 @@ const Books = () => {
               >
                 update
               </Button>
-              <hr align="left" width="400" size="3" color="#0000dd" />
             </div>
           );
         })}

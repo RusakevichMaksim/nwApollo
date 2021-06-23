@@ -36,3 +36,54 @@
     transform: rotate(360deg);
   }
 }
+
+.text__Backgound {
+  background-color: rgb(249 249 249);
+  padding: 10px;
+}
+.book__card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.book__card {
+  padding: 20px;
+  border: 2px solid #3f51b5;
+  width: 320px;
+  margin: 5px;
+}
+
+.mr-10 {
+  margin-right: 10px !important;
+}
+.update__card-wrapper {
+  width: 320px;
+  background-color: rgb(236 233 233);
+  padding: 10px;
+}
+.update__input-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+
+.update__input {
+  margin-bottom: 10px;
+  line-height: 2;
+  border: 1px solid #844040;
+}
+
+.update__button-general {
+  background-color: red;
+  color: white;
+  height: 30px;
+  margin-top: 30px;
+  border: none;
+}
+.update__button-general:hover {
+  background-color: #cc0404;
+}
+.update__button-general:active {
+  background-color: rgb(185, 132, 132);
+}

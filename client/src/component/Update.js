@@ -13,7 +13,6 @@ const Update = (props) => {
 
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { id: idBooks },
-    fetchPolicy: "cache-first",
   });
   const [updateBook] = useMutation(UPDATE_BOOK, {
     refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
@@ -22,28 +21,24 @@ const Update = (props) => {
   if (loading) return <div>Loading...</div>;
   if (error || !data) return <div>oops...</div>;
   return (
-    <div>
-      <p>Concat field: {data.getBook.Concat}</p>
-      <p>id: {data.getBook.id}</p>
-      <p>title: {data.getBook.title}</p>
-      <p>author: {data.getBook.author}</p>{" "}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "200px",
-          paddingBottom: "50px",
-        }}
-      >
-        <input ref={newTitle} defaultValue={data.getBook.title} />
-        <input ref={newAuthor} defaultValue={data.getBook.author} />
+    <div className="update__card-wrapper">
+      <p className="text__Backgound">Concat field: {data.getBook.Concat}</p>
+      <p className="text__Backgound">id: {data.getBook.id}</p>
+      <p className="text__Backgound">title: {data.getBook.title}</p>
+      <p className="text__Backgound">author: {data.getBook.author}</p>{" "}
+      <div className="update__input-wrapper ">
+        <input
+          className="text__Backgound update__input"
+          ref={newTitle}
+          defaultValue={data.getBook.title}
+        />
+        <input
+          className="text__Backgound update__input"
+          ref={newAuthor}
+          defaultValue={data.getBook.author}
+        />
         <button
-          style={{
-            backgroundColor: "red",
-            color: "white",
-            height: "30px",
-            marginTop: "20px",
-          }}
+          className="update__button-general"
           onClick={() => {
             updateBook({
               variables: {

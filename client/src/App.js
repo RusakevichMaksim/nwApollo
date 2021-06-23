@@ -14,7 +14,7 @@ function App() {
       }}
     >
       <Switch>
-        <Route exact path="/:page?">
+        <Route exact path="/">
           <Books />
         </Route>
         <Route path="/subs/">
