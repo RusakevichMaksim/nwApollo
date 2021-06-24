@@ -113,6 +113,7 @@ const Books = () => {
           onClick={() => {
             hendleOffsetChange(offset + limit);
           }}
+          disabled={data.books.length !== limit ? true : false}
         >
           next page
         </Button>
