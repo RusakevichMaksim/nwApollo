@@ -35,7 +35,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addBook(onebook: BookInput): Book
+    addBook(onebook: BookInput): String
     updateBook(book: BookInput): String
     deleteBook(id: ID): String
   }
@@ -61,7 +61,8 @@ const resolvers = {
   },
   Mutation: {
     addBook: (parent, arg) => {
-      return books.push(arg.onebook);
+      books.push(arg.onebook);
+      return "book added";
     },
     deleteBook: (parent, arg) => {
       let someBooks = books.filter((item) => item.id < arg.id);
