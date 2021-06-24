@@ -3,9 +3,9 @@ import Button from "@material-ui/core/Button";
 const BooksList = ({ books, deleteBook, push }) => {
   return (
     <div className="book__card-wrapper ">
-      {books.map((book) => {
+      {books.map((book, index) => {
         return (
-          <div key={book.title} className="book__card">
+          <div key={book.title + book.id + index} className="book__card">
             <p className="text__Backgound">{book.title}</p>
             <p className="text__Backgound">{book.author}</p>
             <Button
@@ -14,8 +14,6 @@ const BooksList = ({ books, deleteBook, push }) => {
               className="mr-10"
               onClick={() => {
                 deleteBook({ variables: { id: book.id } });
-                // client.cache.evict({ id: book.id });
-                // console.log(client.cache.data.data);
               }}
             >
               deleted {book.id}

@@ -41,7 +41,6 @@ const ControllButton = ({
         <option value={10}>10</option>
         <option value={15}>15</option>
       </select>
-      {/* <input onChange={(e) => console.log(e.target.value)} /> */}
     </div>
   );
 };
