@@ -24,6 +24,19 @@ const Books = () => {
   });
   const hendleOffsetChange = (value) => {
     setOffset(value);
+    // для постепенного обновления
+    // fetchMore({
+    //   variables: {
+    //     offset: value,
+    //     limit: limit,
+    //   },
+    //   updateQuery: (prev, { fetchMoreResult }) => {
+    //     if (!fetchMoreResult) return prev;
+    //     return Object.assign({}, prev, {
+    //       books: [...prev.books, ...fetchMoreResult.books],
+    //     });
+    //   },
+    // });
   };
 
   const [inputBook, setInputBook] = useState({ id: "", title: "", author: "" });
