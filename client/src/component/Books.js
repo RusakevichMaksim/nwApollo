@@ -15,15 +15,30 @@ const Books = () => {
   const { push } = useHistory();
   const classes = useStyles();
   const [offset, setOffset] = useState(0);
+  const [limitNew, setLimitNew] = useState(5);
+
   const limit = 5;
-  const { loading, error, data, refetch } = useQuery(GET_ALL_BOOKS, {
+  const { loading, error, data, fetchMore } = useQuery(GET_ALL_BOOKS, {
     variables: {
       offset: offset,
-      limit: limit,
+      limit: limitNew,
     },
   });
+
+  const hendleLimitNewChange = (value) => {
+    // console.log(parseInt(value, 10));
+    setLimitNew(parseInt(value, 10));
+  };
+
   const hendleOffsetChange = (value) => {
     setOffset(value);
+    fetchMore({
+      variables: {
+        offset: value,
+        limit: limitNew,
+      },
+    });
+
     // для постепенного обновления
     // fetchMore({
     //   variables: {
@@ -52,7 +67,7 @@ const Books = () => {
         query: GET_ALL_BOOKS,
         variables: {
           offset: offset,
-          limit: limit,
+          limit: limitNew,
         },
       },
     ],
@@ -63,7 +78,7 @@ const Books = () => {
         query: GET_ALL_BOOKS,
         variables: {
           offset: offset,
-          limit: limit,
+          limit: limitNew,
         },
       },
     ],
@@ -124,12 +139,26 @@ const Books = () => {
           variant="contained"
           color="primary"
           onClick={() => {
-            hendleOffsetChange(offset + limit);
+            hendleOffsetChange(offset + limitNew);
           }}
-          disabled={data.books.length !== limit ? true : false}
+          disabled={data.books.length === 0 ? true : false}
         >
+          {console.log(data.books.length)}
           next page
         </Button>
+        <select
+          onChange={(e) => {
+            // console.log(e.target.value);
+            hendleLimitNewChange(e.target.value);
+          }}
+          value={limitNew}
+          className="book_select"
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+        </select>
+        {/* <input onChange={(e) => console.log(e.target.value)} /> */}
       </div>
       <div className={classes.inp}>
         <TextField

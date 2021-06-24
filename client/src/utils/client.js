@@ -37,6 +37,20 @@ const client = new ApolloClient({
               return existing ?? bookRef;
             },
           },
+          books: {
+            keyFields: ["id"],
+            read(existing, { args: { offset, limit } }) {
+              return existing && existing.slice(offset, offset + limit);
+            },
+            keyArgs: [],
+            merge(existing, incoming, { args: { offset } }) {
+              const merged = existing ? existing.slice(0) : [];
+              for (let i = 0; i < incoming.length; ++i) {
+                merged[offset + i] = incoming[i];
+              }
+              return merged;
+            },
+          },
         },
       },
       Book: {
