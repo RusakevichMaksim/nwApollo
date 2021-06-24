@@ -51,8 +51,6 @@ const client = new ApolloClient({
               //fix, delete dublicate last element
               if (existing) {
                 if (merged.length - offset > incoming.length) {
-                  console.log(merged.length - offset, incoming.length);
-                  console.log("aaa");
                   merged.pop();
                 }
               }
