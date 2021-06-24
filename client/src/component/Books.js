@@ -9,11 +9,12 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import client from "../utils/client";
-const useStyles = makeStyles({});
+import ControllButton from "./BooksComponent/controllButton";
+import AddButton from "./BooksComponent/addButton";
+import BooksList from "./BooksComponent/booksList";
 
 const Books = () => {
   const { push } = useHistory();
-  const classes = useStyles();
   const [offset, setOffset] = useState(0);
   const [limitNew, setLimitNew] = useState(5);
 
@@ -44,7 +45,6 @@ const Books = () => {
         limit: limitNew,
       },
     });
-
     // для постепенного обновления
     // fetchMore({
     //   variables: {
@@ -93,107 +93,28 @@ const Books = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
-    <div className={classes.root}>
+    <div>
       <Button
         variant="contained"
         color="primary"
-        style={{ marginBottom: "10px" }}
+        className="mb-10"
         onClick={() => push("/subs")}
       >
         go to websocket
       </Button>
-      <div className="book__card-wrapper ">
-        {data.books.map((book) => {
-          return (
-            <div key={book.title} className="book__card">
-              <p className="text__Backgound">{book.title}</p>
-              <p className="text__Backgound">{book.author}</p>
-              <Button
-                variant="contained"
-                color="primary"
-                className="mr-10"
-                onClick={() => {
-                  deleteBook({ variables: { id: book.id } });
-                  // client.cache.evict({ id: book.id });
-                  // console.log(client.cache.data.data);
-                }}
-              >
-                deleted {book.id}
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => push(`/update/${book.id}`)}
-              >
-                update
-              </Button>
-            </div>
-          );
-        })}
-      </div>
-      <div className="mt-10 mb-10">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            hendleOffsetChange(offset - limitNew);
-          }}
-          disabled={offset === 0 ? true : false}
-        >
-          back page
-        </Button>
-        <Button
-          className="ml-10"
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            hendleOffsetChange(offset + limitNew);
-          }}
-          disabled={data.books.length === 0 ? true : false}
-        >
-          next page
-        </Button>
-        <select
-          onChange={(e) => {
-            // console.log(e.target.value);
-            hendleLimitNewChange(e.target.value);
-          }}
-          value={limitNew}
-          className="book_select"
-        >
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={15}>15</option>
-        </select>
-        {/* <input onChange={(e) => console.log(e.target.value)} /> */}
-      </div>
-      <div className={classes.inp}>
-        <TextField
-          placeholder="id"
-          value={inputBook.id}
-          onChange={(e) => handleChangeBookInput("id", e.target.value)}
-        />
-        <TextField
-          placeholder="title"
-          value={inputBook.title}
-          onChange={(e) => handleChangeBookInput("title", e.target.value)}
-        />
-        <TextField
-          placeholder="author"
-          value={inputBook.author}
-          onChange={(e) => handleChangeBookInput("author", e.target.value)}
-        />
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            addBook({ variables: { onebook: inputBook } });
-          }}
-        >
-          add item
-        </Button>
-      </div>
+      <BooksList books={data.books} deleteBook={deleteBook} push={push} />
+      <ControllButton
+        hendleOffsetChange={hendleOffsetChange}
+        hendleLimitNewChange={hendleLimitNewChange}
+        offset={offset}
+        limitNew={limitNew}
+        booksLength={data.books.length}
+      />
+      <AddButton
+        handleChangeBookInput={handleChangeBookInput}
+        inputBook={inputBook}
+        addBook={addBook}
+      />
     </div>
   );
 };
