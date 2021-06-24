@@ -22,6 +22,7 @@ const AddButton = ({ handleChangeBookInput, inputBook, addBook }) => {
 
       <Button
         variant="contained"
+        className="ml-10"
         color="primary"
         onClick={() => {
           addBook({ variables: { onebook: inputBook } });

@@ -52,7 +52,6 @@ const resolvers = {
       { id: 1, content: "Bye!" },
     ],
     books: (parent, arg) => {
-      console.log(arg);
       return books.slice(arg.offset, arg.offset + arg.limit);
     },
     getBook: (parent, arg) => {

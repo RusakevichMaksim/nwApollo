@@ -1,7 +1,8 @@
 import { useHistory } from "react-router-dom";
 import { useSubscription } from "@apollo/client";
-import COMMENTS_SUBSCRIPTION from "../api/Subscr";
 import Button from "@material-ui/core/Button";
+
+import COMMENTS_SUBSCRIPTION from "../api/Subscr";
 
 const Subs = () => {
   const { push } = useHistory();

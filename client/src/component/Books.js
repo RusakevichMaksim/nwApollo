@@ -1,24 +1,19 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
-
-import { GET_ALL_BOOKS } from "../api/GetAllBooks";
-import { ADD_BOOK } from "../api/AddBook";
-import { DELETE_BOOKS } from "../api/DeleteBook";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import client from "../utils/client";
 import ControllButton from "./BooksComponent/controllButton";
 import AddButton from "./BooksComponent/addButton";
 import BooksList from "./BooksComponent/booksList";
+import { GET_ALL_BOOKS } from "../api/GetAllBooks";
+import { ADD_BOOK } from "../api/AddBook";
+import { DELETE_BOOKS } from "../api/DeleteBook";
 
 const Books = () => {
   const { push } = useHistory();
   const [offset, setOffset] = useState(0);
   const [limitNew, setLimitNew] = useState(5);
 
-  const limit = 5;
   const { loading, error, data, fetchMore } = useQuery(GET_ALL_BOOKS, {
     variables: {
       offset: offset,
@@ -26,8 +21,30 @@ const Books = () => {
     },
   });
 
+  const [addBook] = useMutation(ADD_BOOK, {
+    refetchQueries: [
+      {
+        query: GET_ALL_BOOKS,
+        variables: {
+          offset: offset,
+          limit: limitNew,
+        },
+      },
+    ],
+  });
+  const [deleteBook] = useMutation(DELETE_BOOKS, {
+    refetchQueries: [
+      {
+        query: GET_ALL_BOOKS,
+        variables: {
+          offset: offset,
+          limit: limitNew,
+        },
+      },
+    ],
+  });
+
   const hendleLimitNewChange = (value) => {
-    // console.log(parseInt(value, 10));
     setLimitNew(parseInt(value, 10));
     fetchMore({
       variables: {
@@ -38,6 +55,10 @@ const Books = () => {
   };
 
   const hendleOffsetChange = (value) => {
+    // fix, back click -value
+    if (value < 0) {
+      value = 0;
+    }
     setOffset(value);
     fetchMore({
       variables: {
@@ -67,28 +88,6 @@ const Books = () => {
       [name]: value,
     }));
   };
-  const [addBook] = useMutation(ADD_BOOK, {
-    refetchQueries: [
-      {
-        query: GET_ALL_BOOKS,
-        variables: {
-          offset: offset,
-          limit: limitNew,
-        },
-      },
-    ],
-  });
-  const [deleteBook] = useMutation(DELETE_BOOKS, {
-    refetchQueries: [
-      {
-        query: GET_ALL_BOOKS,
-        variables: {
-          offset: offset,
-          limit: limitNew,
-        },
-      },
-    ],
-  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

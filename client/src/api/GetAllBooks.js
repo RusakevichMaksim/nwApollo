@@ -9,12 +9,3 @@ export const GET_ALL_BOOKS = gql`
     }
   }
 `;
-// export const GET_ALL_BOOKS = gql`
-//   query Book {
-//     books {
-//       id
-//       title
-//       author
-//     }
-//   }
-// `;
