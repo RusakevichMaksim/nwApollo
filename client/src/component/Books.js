@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-
+import client from "../utils/client";
 const useStyles = makeStyles({});
 
 const Books = () => {
@@ -28,6 +28,12 @@ const Books = () => {
   const hendleLimitNewChange = (value) => {
     // console.log(parseInt(value, 10));
     setLimitNew(parseInt(value, 10));
+    fetchMore({
+      variables: {
+        offset: offset,
+        limit: parseInt(value, 10),
+      },
+    });
   };
 
   const hendleOffsetChange = (value) => {
@@ -108,6 +114,8 @@ const Books = () => {
                 className="mr-10"
                 onClick={() => {
                   deleteBook({ variables: { id: book.id } });
+                  // client.cache.evict({ id: book.id });
+                  // console.log(client.cache.data.data);
                 }}
               >
                 deleted {book.id}
@@ -128,7 +136,7 @@ const Books = () => {
           variant="contained"
           color="primary"
           onClick={() => {
-            hendleOffsetChange(offset - limit);
+            hendleOffsetChange(offset - limitNew);
           }}
           disabled={offset === 0 ? true : false}
         >
@@ -143,7 +151,6 @@ const Books = () => {
           }}
           disabled={data.books.length === 0 ? true : false}
         >
-          {console.log(data.books.length)}
           next page
         </Button>
         <select
