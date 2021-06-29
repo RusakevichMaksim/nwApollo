@@ -35,7 +35,7 @@ const ControllButton = ({
           hendleLimitNewChange(e.target.value);
         }}
         value={limitNew}
-        className="book_select"
+        className="book__select"
       >
         <option value={5}>5</option>
         <option value={10}>10</option>

@@ -22,18 +22,18 @@ const Update = (props) => {
   if (error || !data) return <div>oops...</div>;
   return (
     <div className="update__card-wrapper">
-      <p className="text__Backgound">Concat field: {data.getBook.Concat}</p>
-      <p className="text__Backgound">id: {data.getBook.id}</p>
-      <p className="text__Backgound">title: {data.getBook.title}</p>
-      <p className="text__Backgound">author: {data.getBook.author}</p>{" "}
+      <p className="text__backgound">Concat field: {data.getBook.Concat}</p>
+      <p className="text__backgound">id: {data.getBook.id}</p>
+      <p className="text__backgound">title: {data.getBook.title}</p>
+      <p className="text__backgound">author: {data.getBook.author}</p>{" "}
       <div className="update__input-wrapper ">
         <input
-          className="text__Backgound update__input"
+          className="text__backgound update__input"
           ref={newTitle}
           defaultValue={data.getBook.title}
         />
         <input
-          className="text__Backgound update__input"
+          className="text__backgound update__input"
           ref={newAuthor}
           defaultValue={data.getBook.author}
         />

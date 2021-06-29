@@ -13,7 +13,7 @@ const Subs = () => {
       <Button variant="contained" color="primary" onClick={() => push("/")}>
         go back
       </Button>
-      <h4 className="text__Backgound">
+      <h4 className="text__backgound">
         New comment: {!loading && data.messageCreated.content}
       </h4>
     </div>

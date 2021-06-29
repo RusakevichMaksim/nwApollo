@@ -4,11 +4,11 @@ import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import ControllButton from "./BooksComponent/controllButton";
 import AddButton from "./BooksComponent/addButton";
-import BooksList from "./BooksComponent/booksList";
+// import BooksList from "./BooksComponent/booksList";
 import { GET_ALL_BOOKS } from "../api/GetAllBooks";
 import { ADD_BOOK } from "../api/AddBook";
 import { DELETE_BOOKS } from "../api/DeleteBook";
-
+import { BooksList } from "./BooksComponent/booksList";
 const Books = () => {
   const { push } = useHistory();
   const [offset, setOffset] = useState(0);
