@@ -20,28 +20,31 @@ const Update = (props) => {
 
   if (loading) return <div>Loading...</div>;
   if (error || !data) return <div>oops...</div>;
-  console.log(data);
   return (
     <div className="update__card-wrapper">
       <p className="text__backgound">Concat field: {data.getBook.Concat}</p>
       <p className="text__backgound">id: {data.getBook.id}</p>
       <p className="text__backgound">title: {data.getBook.title}</p>
       <p className="text__backgound">author: {data.getBook.author}</p>{" "}
-      <div style={{ border: "1px solid #e2d1d1" }} className="mb-30 mt-30">
-        <p className="text__backgound">
-          <span style={{ fontWeight: "500", paddingRight: "5px" }}>
-            more books this author:
-          </span>
-          {data.getBook.author}
-        </p>
-        {data.getBook.autorBookList.map((e, index) => {
-          return (
-            <p key={index + "more"} className="text__backgound">
-              book title: {e.title}
-            </p>
-          );
-        })}
-      </div>
+      {data.getBook.autorBookList && data.getBook.autorBookList.length !== 0 ? (
+        <div style={{ border: "1px solid #e2d1d1" }} className="mb-30 mt-30">
+          <p className="text__backgound">
+            <span style={{ fontWeight: "500", paddingRight: "5px" }}>
+              more books this author:
+            </span>
+            {data.getBook.author}
+          </p>
+          {data.getBook.autorBookList.map((e, index) => {
+            return (
+              <p key={index + "more"} className="text__backgound">
+                book title: {e.title}
+              </p>
+            );
+          })}
+        </div>
+      ) : (
+        ""
+      )}
       <div className="update__input-wrapper ">
         <input
           className="text__backgound update__input"

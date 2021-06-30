@@ -6,8 +6,8 @@ const BooksListMemo = ({ books, deleteBook, push }) => {
       {books.map((book, index) => {
         return (
           <div key={book.title + book.id + index} className="book__card">
-            <p className="text__backgound">{book.title}</p>
-            <p className="text__backgound">{book.author}</p>
+            <p className="text__backgound">Title: {book.title}</p>
+            <p className="text__backgound">Author: {book.author}</p>
             <Button
               variant="contained"
               color="primary"

@@ -66,10 +66,13 @@ const resolvers = {
           return {
             title: obj.title,
           };
-          return obj.title;
         });
-      findBook.autorBookList = allAutorsBook;
-      console.log(findBook);
+      if (allAutorsBook.length !== 1) {
+        findBook.autorBookList = allAutorsBook;
+      } else {
+        findBook.autorBookList = [];
+      }
+
       return findBook;
     },
   },
