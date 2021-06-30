@@ -1,13 +1,13 @@
 const books = [
   {
     id: 1,
-    title: "The Awakening",
-    author: "Kate Chopin",
+    title: "test1",
+    author: "auth1",
   },
   {
     id: 2,
-    title: "City of Glass",
-    author: "Paul Auster",
+    title: "test2",
+    author: "auth2",
   },
   {
     id: 3,
@@ -47,17 +47,17 @@ const books = [
   {
     id: 10,
     title: "test10",
-    author: "auth10",
+    author: "auth2",
   },
   {
     id: 11,
     title: "test11",
-    author: "auth11",
+    author: "auth1",
   },
   {
     id: 12,
     title: "test12",
-    author: "auth12",
+    author: "auth3",
   },
   {
     id: 13,
@@ -87,12 +87,12 @@ const books = [
   {
     id: 18,
     title: "test18",
-    author: "auth18",
+    author: "auth1",
   },
   {
     id: 19,
     title: "test19",
-    author: "auth19",
+    author: "auth2",
   },
   {
     id: 20,
@@ -102,7 +102,7 @@ const books = [
   {
     id: 21,
     title: "test21",
-    author: "auth21",
+    author: "auth3",
   },
   {
     id: 22,

@@ -16,10 +16,14 @@ const typeDefs = gql`
     name: String
     books: [Book]
   }
+  type autorBookList {
+    title: String
+  }
   type Book {
     id: ID
     title: String
     author: String
+    autorBookList: [autorBookList]
   }
 
   type Query {
@@ -55,7 +59,18 @@ const resolvers = {
       return books.slice(arg.offset, arg.offset + arg.limit);
     },
     getBook: (parent, arg) => {
-      return books.find(({ id }) => arg.id == id);
+      let findBook = books.find(({ id }) => arg.id == id);
+      var allAutorsBook = books
+        .filter((obj) => obj.author === findBook.author)
+        .map((obj) => {
+          return {
+            title: obj.title,
+          };
+          return obj.title;
+        });
+      findBook.autorBookList = allAutorsBook;
+      console.log(findBook);
+      return findBook;
     },
   },
   Mutation: {
