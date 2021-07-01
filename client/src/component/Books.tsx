@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router";
 import Button from "@material-ui/core/Button";
 import ControllButton from "./BooksComponent/controllButton";
 import AddButton from "./BooksComponent/addButton";
@@ -44,7 +44,7 @@ const Books = () => {
     ],
   });
 
-  const hendleLimitNewChange = (value) => {
+  const hendleLimitNewChange = (value: any): void => {
     setLimitNew(parseInt(value, 10));
     fetchMore({
       variables: {
@@ -54,7 +54,7 @@ const Books = () => {
     });
   };
 
-  const hendleOffsetChange = (value) => {
+  const hendleOffsetChange = (value: any) => {
     // fix, back click -value
     if (value < 0) {
       value = 0;
@@ -82,7 +82,7 @@ const Books = () => {
   };
 
   const [inputBook, setInputBook] = useState({ id: "", title: "", author: "" });
-  const handleChangeBookInput = (name, value) => {
+  const handleChangeBookInput = (name: string, value: string) => {
     setInputBook((prevState) => ({
       ...prevState,
       [name]: value,
@@ -101,7 +101,7 @@ const Books = () => {
       >
         go to websocket
       </Button>
-      <BooksList books={data.books} deleteBook={deleteBook} push={push} />
+      <BooksList books={data.books} deleteBook={deleteBook} />
       <ControllButton
         hendleOffsetChange={hendleOffsetChange}
         hendleLimitNewChange={hendleLimitNewChange}

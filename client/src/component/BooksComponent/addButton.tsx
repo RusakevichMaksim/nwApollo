@@ -1,13 +1,30 @@
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { BookType } from "./type";
+type inputBookType = {
+  inputBook: BookType;
+};
+type handleChangeBookInputType = {
+  handleChangeBookInput: (name: string, value: string) => void;
+};
+type addBookType = {
+  addBook: () => void;
+};
+type PropsType = inputBookType & handleChangeBookInputType & addBookType;
 
-const AddButton = ({ handleChangeBookInput, inputBook, addBook }) => {
+const AddButton: React.FC<PropsType> = ({
+  handleChangeBookInput,
+  inputBook,
+  addBook,
+}) => {
   return (
     <div>
       <TextField
         placeholder="id"
         value={inputBook.id}
-        onChange={(e) => handleChangeBookInput("id", e.target.value)}
+        onChange={(e) => {
+          handleChangeBookInput("id", e.target.value);
+        }}
       />
       <TextField
         placeholder="title"
@@ -25,6 +42,7 @@ const AddButton = ({ handleChangeBookInput, inputBook, addBook }) => {
         className="ml-10"
         color="primary"
         onClick={() => {
+          //@ts-ignore
           addBook({ variables: { onebook: inputBook } });
         }}
       >

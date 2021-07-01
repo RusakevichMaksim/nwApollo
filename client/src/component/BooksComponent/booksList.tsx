@@ -1,6 +1,20 @@
 import Button from "@material-ui/core/Button";
 import React from "react";
-const BooksListMemo = ({ books, deleteBook, push }) => {
+import { BookType } from "./type";
+import { useHistory } from "react-router";
+
+type BookTypes = {
+  books: [BookType];
+};
+type deleteBookType = {
+  deleteBook: () => void;
+};
+
+type PropsType = BookTypes & deleteBookType;
+
+const BooksListMemo: React.FC<PropsType> = ({ books, deleteBook }) => {
+  const { push } = useHistory();
+
   return (
     <div className="book__card-wrapper ">
       {books.map((book, index) => {
@@ -13,6 +27,7 @@ const BooksListMemo = ({ books, deleteBook, push }) => {
               color="primary"
               className="mr-10"
               onClick={() => {
+                //@ts-ignore
                 deleteBook({ variables: { id: book.id } });
               }}
             >
@@ -21,6 +36,7 @@ const BooksListMemo = ({ books, deleteBook, push }) => {
             <Button
               variant="contained"
               color="primary"
+              //@ts-ignore
               onClick={() => push(`/update/${book.id}`)}
             >
               update

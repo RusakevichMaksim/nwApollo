@@ -4,12 +4,13 @@ import { useParams } from "react-router";
 import UPDATE_BOOK from "../api/UpdateBook";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
-
-const Update = (props) => {
+import { BookType } from "./BooksComponent/type";
+type PropsType = {};
+const Update: React.FC<PropsType> = (props) => {
   let history = useHistory();
-  let { idBooks } = useParams();
-  const newTitle = useRef();
-  const newAuthor = useRef();
+  let { idBooks } = useParams<{ idBooks: string }>();
+  const newTitle = useRef<HTMLInputElement | any>(null);
+  const newAuthor = useRef<HTMLInputElement | any>(null);
 
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { id: idBooks },
@@ -29,12 +30,12 @@ const Update = (props) => {
       {data.getBook.autorBookList && data.getBook.autorBookList.length !== 0 ? (
         <div style={{ border: "1px solid #e2d1d1" }} className="mb-30 mt-30">
           <p className="text__backgound">
-            <span style={{ fontWeight: "500", paddingRight: "5px" }}>
+            <span style={{ fontWeight: "bold", paddingRight: "5px" }}>
               more books this author:
             </span>
             {data.getBook.author}
           </p>
-          {data.getBook.autorBookList.map((e, index) => {
+          {data.getBook.autorBookList.map((e: any, index: number) => {
             return (
               <p key={index + "more"} className="text__backgound">
                 book title: {e.title}

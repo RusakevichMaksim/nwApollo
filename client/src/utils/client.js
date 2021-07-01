@@ -2,6 +2,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { split, HttpLink } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
+import { type } from "os";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:3005/graphql",
@@ -38,7 +39,6 @@ const client = new ApolloClient({
             },
           },
           books: {
-            keyFields: ["id"],
             read(existing, { args: { offset, limit } }) {
               return existing && existing.slice(offset, offset + limit);
             },

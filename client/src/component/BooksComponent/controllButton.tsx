@@ -1,6 +1,14 @@
 import Button from "@material-ui/core/Button";
 
-const ControllButton = ({
+type PropsType = {
+  hendleOffsetChange: (value: number) => void;
+  hendleLimitNewChange: (value: string) => void;
+  offset: number;
+  limitNew: number;
+  booksLength: number;
+};
+
+const ControllButton: React.FC<PropsType> = ({
   hendleOffsetChange,
   hendleLimitNewChange,
   offset,
