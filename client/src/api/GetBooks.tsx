@@ -6,9 +6,9 @@ const GET_BOOKS = gql`
       id
       title
       author
-      autorBookList {
-        title
-      }
+      # autorBookList {
+      #   title
+      # }
       Concat @client
     }
   }

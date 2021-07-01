@@ -14,12 +14,42 @@ const Update: React.FC<PropsType> = (props) => {
 
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { id: idBooks },
-  });
-  const [updateBook] = useMutation(UPDATE_BOOK, {
-    refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
+    fetchPolicy: "standby",
   });
 
-  if (loading) return <div>Loading...</div>;
+  const [updateBook] = useMutation(UPDATE_BOOK, {
+    // refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
+    update(cache) {
+      console.log("data");
+      cache.writeQuery({
+        query: UPDATE_BOOK,
+        variables: { id: idBooks },
+        data: {
+          updateBook: {
+            id: idBooks,
+            title: newTitle.current.value,
+            author: newAuthor.current.value,
+          },
+        },
+      });
+    },
+    // update(cache, { data: { updateBook } }) {
+    //   cache.modify({
+    //     fields: {
+    //       todos(existingTodos = []) {
+    //         console.log("data");
+    //         const newTodoRef = cache.writeFragment({
+    //           data: updateBook,
+    //           fragment: GET_BOOKS,
+    //         });
+    //         return [...existingTodos, newTodoRef];
+    //       },
+    //     },
+    //   });
+    // },
+  });
+
+  // if (loading) return <div>Loading...</div>;
   if (error || !data) return <div>oops...</div>;
   return (
     <div className="update__card-wrapper">
