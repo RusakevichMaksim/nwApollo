@@ -40,7 +40,7 @@ const typeDefs = gql`
 
   type Mutation {
     addBook(onebook: BookInput): String
-    updateBook(book: BookInput): String
+    updateBook(book: BookInput): Book
     deleteBook(id: ID): String
   }
 
@@ -89,7 +89,7 @@ const resolvers = {
     updateBook: (parent, arg) => {
       objIndex = books.findIndex((obj) => obj.id == arg.book.id);
       books[objIndex] = arg.book;
-      return "update";
+      return books[objIndex];
     },
   },
   Subscription: {

@@ -5,6 +5,7 @@ import UPDATE_BOOK from "../api/UpdateBook";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { BookType } from "./BooksComponent/type";
+import { useEffect } from "react";
 type PropsType = {};
 const Update: React.FC<PropsType> = (props) => {
   let history = useHistory();
@@ -15,8 +16,24 @@ const Update: React.FC<PropsType> = (props) => {
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { id: idBooks },
   });
+
   const [updateBook] = useMutation(UPDATE_BOOK, {
-    refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
+    // обновить с сервера
+    // refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
+    update(cache) {
+      console.log("data");
+      cache.writeQuery({
+        query: UPDATE_BOOK,
+        variables: { id: idBooks },
+        data: {
+          updateBook: {
+            id: idBooks,
+            title: newTitle.current.value,
+            author: newAuthor.current.value,
+          },
+        },
+      });
+    },
   });
 
   if (loading) return <div>Loading...</div>;
