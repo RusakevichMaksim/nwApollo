@@ -59,17 +59,6 @@ const client = new ApolloClient({
           },
         },
       },
-      Mutation: {
-        fields: {
-          updateBook: {
-            read: (existing, { toReference, args }) => {
-              console.log("aaa");
-              const bookRef = toReference({ __typename: "Book", id: args.id });
-              return existing ?? bookRef;
-            },
-          },
-        },
-      },
       Book: {
         keyFields: ["id"],
         fields: {
