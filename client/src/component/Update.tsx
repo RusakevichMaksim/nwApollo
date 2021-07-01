@@ -5,6 +5,7 @@ import UPDATE_BOOK from "../api/UpdateBook";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { BookType } from "./BooksComponent/type";
+import { useEffect } from "react";
 type PropsType = {};
 const Update: React.FC<PropsType> = (props) => {
   let history = useHistory();
@@ -14,10 +15,10 @@ const Update: React.FC<PropsType> = (props) => {
 
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { id: idBooks },
-    fetchPolicy: "standby",
   });
 
   const [updateBook] = useMutation(UPDATE_BOOK, {
+    // обновить с сервера
     // refetchQueries: [{ query: GET_BOOKS, variables: { id: idBooks } }],
     update(cache) {
       console.log("data");
@@ -33,23 +34,9 @@ const Update: React.FC<PropsType> = (props) => {
         },
       });
     },
-    // update(cache, { data: { updateBook } }) {
-    //   cache.modify({
-    //     fields: {
-    //       todos(existingTodos = []) {
-    //         console.log("data");
-    //         const newTodoRef = cache.writeFragment({
-    //           data: updateBook,
-    //           fragment: GET_BOOKS,
-    //         });
-    //         return [...existingTodos, newTodoRef];
-    //       },
-    //     },
-    //   });
-    // },
   });
 
-  // if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
   if (error || !data) return <div>oops...</div>;
   return (
     <div className="update__card-wrapper">
