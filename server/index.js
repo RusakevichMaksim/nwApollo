@@ -1,53 +1,12 @@
 const express = require("express");
 const { createServer } = require("http");
 const { PubSub } = require("apollo-server");
-const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-express");
 const { books } = require("./booksArray");
 const app = express();
 const pubsub = new PubSub();
 const MESSAGE_CREATED = "MESSAGE_CREATED";
-
-const typeDefs = gql`
-  type Message {
-    id: String
-    content: String
-  }
-  type Author {
-    name: String
-    books: [Book]
-  }
-  type autorBookList {
-    title: String
-  }
-  type Book {
-    id: ID
-    title: String
-    author: String
-    autorBookList: [autorBookList]
-  }
-
-  type Query {
-    books(offset: Int!, limit: Int!): [Book]
-    authors: [Author]
-    getBook(id: ID): Book
-    messages: [Message!]!
-  }
-  input BookInput {
-    id: ID
-    title: String
-    author: String
-  }
-
-  type Mutation {
-    addBook(onebook: BookInput): String
-    updateBook(book: BookInput): Book
-    deleteBook(id: ID): String
-  }
-
-  type Subscription {
-    messageCreated: Message
-  }
-`;
+const { typeDefs } = require("./schema");
 
 const resolvers = {
   Query: {
@@ -79,7 +38,7 @@ const resolvers = {
   Mutation: {
     addBook: (parent, arg) => {
       books.push(arg.onebook);
-      return "book added";
+      return arg.onebook;
     },
     deleteBook: (parent, arg) => {
       let someBooks = books.filter((item) => item.id < arg.id);
@@ -102,6 +61,13 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => {
+    // console.log(req.headers);
+    const token = req.headers.authorization || "";
+    // const user = getUser(token);
+    console.log(token, "token");
+    return { loggedIn: true };
+  },
 });
 
 server.applyMiddleware({ app, path: "/graphql" });

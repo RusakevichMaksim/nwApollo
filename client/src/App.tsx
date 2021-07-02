@@ -3,8 +3,14 @@ import Subs from "./component/Subs";
 import Books from "./component/Books";
 import { Route, Switch } from "react-router-dom";
 import Update from "./component/Update";
+import Auth from "./component/Auth";
 const topPadding = "20px";
 function App() {
+  // let auth1;
+  // if (!auth1) {
+  //   return <Auth />;
+  // }
+
   return (
     <div
       style={{
