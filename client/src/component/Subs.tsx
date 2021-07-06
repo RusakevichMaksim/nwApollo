@@ -7,7 +7,11 @@ import COMMENTS_SUBSCRIPTION from "../api/Subscr";
 const Subs = () => {
   const { push } = useHistory();
 
-  const { data, loading } = useSubscription(COMMENTS_SUBSCRIPTION);
+  const { data, loading, error } = useSubscription(COMMENTS_SUBSCRIPTION);
+  console.log(data);
+  if (error) return <div>oops</div>;
+
+  if (loading) return <div>loading...</div>;
   return (
     <div>
       <Button variant="contained" color="primary" onClick={() => push("/")}>

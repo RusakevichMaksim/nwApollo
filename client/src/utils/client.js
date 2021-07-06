@@ -6,6 +6,10 @@ import { type } from "os";
 
 const httpLink = new HttpLink({
   uri: "http://localhost:3005/graphql",
+  headers: {
+    authorization: `token-for-maurice-moss`,
+    "content-type": "application/json",
+  },
 });
 
 const wsLink = new WebSocketLink({
